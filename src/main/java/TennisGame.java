@@ -69,13 +69,19 @@ public class TennisGame {
 
     private void firstPlayerWinsOneTieBreakPoint() {
         scoreTieBreakPlayerOne = scoreTieBreakPlayerOne +1;
-        if(scoreTieBreakPlayerOne>=7 && scoreTieBreakPlayerOne> scoreTieBreakPlayerTow +1) firstPlayerWinsOneGame();
+        if(scoreTieBreakPlayerOne>=7 && scoreTieBreakPlayerOne> scoreTieBreakPlayerTow +1) {
+            firstPlayerWinsOneGame();
+            scoreTieBreakPlayerOne = 0;
+            scoreTieBreakPlayerTow = 0;
+        }
     }
 
     private void firstPlayerWinsOnePointAndTheScoreIsMoreThenThreePoints() {
-        if((scoreGamePlayerOne>scoreGamePlayerTow)) firstPlayerWinsOneGame();
+        if(scoreGamePlayerOne>scoreGamePlayerTow) {
+            firstPlayerWinsOneGame();
+        }
         else
-            if  (scoreGamePlayerOne == 3 && scoreGamePlayerTow ==4) {
+            if(scoreGamePlayerOne == 3 && scoreGamePlayerTow ==4) {
                 scoreGamePlayerOne = 5;
                 scoreGamePlayerTow =5;
             }else{
@@ -87,8 +93,6 @@ public class TennisGame {
     private void firstPlayerWinsOneGame() {
         scoreGamePlayerOne = 0;
         scoreGamePlayerTow =0;
-        scoreTieBreakPlayerOne =0;
-        scoreTieBreakPlayerTow =0;
         scoreSetPlayerOne = scoreSetPlayerOne + 1;
         if((scoreSetPlayerOne >= 6 && scoreSetPlayerTow <scoreSetPlayerOne-1)||(scoreSetPlayerOne == 7 && scoreSetPlayerTow ==6)) theWinner ="Player 1 wins the match";
     }
@@ -96,7 +100,6 @@ public class TennisGame {
     public void secondPlayerWinsOnePoint() {
         if(scoreSetPlayerTow==6 && scoreSetPlayerOne == 6) secondPlayerWinsOneTieBreakPoint();
         else {
-
             if (scoreGamePlayerTow >= 3) secondPlayerWinsOnePointAndTheScoreIsMoreThenThreePoints();
             else
                 scoreGamePlayerTow = scoreGamePlayerTow + 1;
@@ -104,29 +107,31 @@ public class TennisGame {
     }
 
     private void secondPlayerWinsOneTieBreakPoint() {
-      if(scoreTieBreakPlayerTow > 7 && scoreTieBreakPlayerTow > scoreTieBreakPlayerOne +1) secondPlayerWinsOneGame();
-          else scoreTieBreakPlayerTow = scoreTieBreakPlayerTow +1;
+        scoreTieBreakPlayerTow = scoreTieBreakPlayerTow +1;
+        if(scoreTieBreakPlayerTow >= 7 && scoreTieBreakPlayerTow > scoreTieBreakPlayerOne +1) {
+          secondPlayerWinsOneGame();
+          scoreTieBreakPlayerOne =0;
+          scoreTieBreakPlayerTow =0;
+        }
     }
 
     private void secondPlayerWinsOnePointAndTheScoreIsMoreThenThreePoints() {
-        if((scoreGamePlayerTow>scoreGamePlayerOne)) secondPlayerWinsOneGame();
+        if((scoreGamePlayerTow > scoreGamePlayerOne)) secondPlayerWinsOneGame();
         else
-        if  (scoreGamePlayerOne == 4 && scoreGamePlayerTow ==3) {
-            scoreGamePlayerOne = 5;
-            scoreGamePlayerTow =5;
-        }else{
-            scoreGamePlayerTow = 4;
-            scoreGamePlayerOne =3;
-        }
+            if(scoreGamePlayerOne == 4 && scoreGamePlayerTow ==3) {
+                scoreGamePlayerOne = 5;
+                scoreGamePlayerTow = 5;
+            }else{
+                scoreGamePlayerTow = 4;
+                scoreGamePlayerOne = 3;
+            }
     }
 
     private void secondPlayerWinsOneGame() {
         scoreGamePlayerOne = 0;
-        scoreGamePlayerTow =0;
-        scoreTieBreakPlayerOne =0;
-        scoreTieBreakPlayerTow =0;
+        scoreGamePlayerTow = 0;
         scoreSetPlayerTow = scoreSetPlayerTow+1;
-        if(scoreSetPlayerTow > 6 && scoreSetPlayerOne < scoreSetPlayerTow-1) theWinner ="Player 2 wins the match";
+        if((scoreSetPlayerTow >= 6 && scoreSetPlayerOne <scoreSetPlayerTow-1)||(scoreSetPlayerTow == 7 && scoreSetPlayerOne ==6)) theWinner ="Player 2 wins the match";
     }
 
     public void setScoreGamePlayerOne(Integer scoreGamePlayerOne) {
